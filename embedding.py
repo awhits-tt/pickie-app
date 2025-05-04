@@ -18,8 +18,17 @@ import chromadb  # using PersistentClient method from ChromaDB
 
 # load and merge datasets (these paths must be updated to fit repository paths)
 print("Loading datasets...")
-posters = pd.read_csv(r'C:\Users\Owner\Desktop\class files\CS 6320\movies-recommender\NLP-Movies-Recommender\posters.csv')
-movies_with_emotions = pd.read_csv(r'C:\Users\Owner\Desktop\class files\CS 6320\movies-recommender\NLP-Movies-Recommender\movies_with_emotions.csv')
+# posters = pd.read_csv(r'C:\Users\Owner\Desktop\class files\CS 6320\movies-recommender\NLP-Movies-Recommender\posters.csv') 
+# movies_with_emotions = pd.read_csv(r'C:\Users\Owner\Desktop\class files\CS 6320\movies-recommender\NLP-Movies-Recommender\movies_with_emotions.csv')
+# movies = pd.merge(movies_with_emotions, posters, on="id")
+
+
+posters_url = "https://raw.githubusercontent.com/haniyyahh/pickie-app/refs/heads/main/posters.csv"
+movies_emotions_url = "https://raw.githubusercontent.com/haniyyahh/pickie-app/refs/heads/main/movies_with_emotions.csv"
+
+posters = pd.read_csv(posters_url)
+movies_with_emotions = pd.read_csv(movies_emotions_url)
+
 movies = pd.merge(movies_with_emotions, posters, on="id")
 
 # enhance image quality
