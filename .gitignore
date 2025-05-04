@@ -16,6 +16,7 @@ yarn-error.log*
 # Python (Flask backend)
 # ----------------------------
 __pycache__/
+chroma_db/
 *.py[cod]
 *.pyo
 *.pyd
