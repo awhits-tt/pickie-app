@@ -14,6 +14,8 @@ attempt to match the best fitted movies from our dataset and output them as reco
 - **Frontend**: React JS with Framer Motion for building an interactive and dynamic user interface
 - **Initial Prototype of Frontend** Created using Gradio
 
+## Video Link
+https://youtu.be/Pmd8TmFKkAg
 
 ## Data Sources:
 - Letterboxd (Movies Dataset) via Kaggle:
