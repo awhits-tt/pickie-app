@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% block title %}Pickie - Landing{% endblock %}
+{% block content %}
+<div class="landing-container">
+    <img src="{{ url_for('static', filename='img/pickie-logo.png') }}" alt="Pickie Logo" class="logo">
+    <h1 class="title">Pickie</h1>
+    <p class="subtitle">Looking for a movie? Just ask Pickie!</p>
+    <button class="begin-button" onclick="window.location.href='/chat'">Begin.</button>
+</div>
+{% endblock %}

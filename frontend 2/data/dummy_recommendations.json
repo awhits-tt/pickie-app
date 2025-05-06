@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "The Enchanted Forest",
+    "poster_url": "https://via.placeholder.com/200x300?text=Enchanted+Forest",
+    "description": "A magical tale of adventure and friendship in a mystical woodland.",
+    "tags": ["fantasy", "adventure", "family"],
+    "score": 0.95
+  },
+  {
+    "id": 2,
+    "title": "Midnight Detective",
+    "poster_url": "https://via.placeholder.com/200x300?text=Midnight+Detective",
+    "description": "A gritty noir mystery unfolds on the rain-soaked streets of the city.",
+    "tags": ["mystery", "thriller", "crime"],
+    "score": 0.88
+  },
+  {
+    "id": 3,
+    "title": "Galactic Odyssey",
+    "poster_url": "https://via.placeholder.com/200x300?text=Galactic+Odyssey",
+    "description": "An epic journey through the stars to save a distant civilization.",
+    "tags": ["sci-fi", "action", "epic"],
+    "score": 0.92
+  }
+]

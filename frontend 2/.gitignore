@@ -1,0 +1,16 @@
+# Python  
+__pycache__/  
+*.py[cod]  
+*.pyo  
+*.pyd  
+
+# Environment  
+.env  
+secrets.py  
+secret_store.py
+
+# Flask session files  
+flask_session/  
+
+# OS files  
+.DS_Store

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: Lato, sans-serif;
+            margin: 0; padding: 1rem;
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+            align-items: center;
+            color: white;
+        }
+
+        body {
+            font-family: Lato, sans-serif;
+            margin: 0;
+            padding: 1rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            background: radial-gradient(
+                circle at 100% 100%,
+                #501762 0%,
+                #0f0812 25%,
+                #501762 50%,
+                #0f0812 75%
+            );
+            background-size: 200% 200%;
+            animation: smoothPulse 10s ease-in-out infinite;
+        }
+        
+        @keyframes smoothPulse {
+            0% {
+                background-position: 0% 0%;
+            }
+            50% {
+                background-position: 100% 100%;
+            }
+            100% {
+                background-position: 0% 0%;
+            }
+        }
+
+        .page-title { font-size: 2.5rem; margin: 2rem 0; text-align: center; font-weight: 300; letter-spacing: 2px; }
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+            max-width: 100%;
+            width: 70rem;
+        }
+        li {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 2 / 3;
+        }
+        figure { margin: 0; position: relative; overflow: hidden; }
+        li a { display: block; }
+        li { overflow: hidden; }
+        figure img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        figure::after {
+            content: ''; position: absolute; top: 50%; left: 50%;
+            width: 200%; height: 200%; background: rgba(0,0,0,0.5);
+            transform-origin: center; opacity: 0; transform: scale(2);
+            transition: opacity 300ms;
+        }
+        figcaption {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            text-align: left;
+            padding: 1rem;
+            color: white;
+            /* ensure all overflow scrolls inside */
+            overflow-y: auto;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 600ms, transform 600ms;
+        }
+        .caption-title { font-size:1.4rem; margin-bottom:0.5rem; font-weight:700; }
+        .caption-tagline { font-size:0.85rem; margin-bottom:0.3rem; font-style:italic; color:#ddd; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+        /* let the parent figcaption handle all scrolling */
+        .caption-description { font-size:0.9rem; margin-bottom:0.8rem; line-height:1.4; word-break: break-word; }
+        .tags { display:flex; flex-wrap:wrap; justify-content:center; gap:0.4rem; }
+        .tag { background: rgba(255,255,255,0.2); padding:0.2rem 0.6rem; border-radius:2rem; font-size:0.8rem; }
+        a:is(:hover, :focus) figure::after { opacity:1; transform: scale(0); transition: transform 900ms; }
+        a:is(:hover, :focus) figcaption { opacity:1; transform: translate3d(0,0,0); transition: opacity 600ms 400ms, transform 600ms 400ms; }
+        @media (prefers-reduced-motion: no-preference) {
+            a:is(:hover, :focus) img { transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="page-title">Pickie's Recommendations</h1>
+    <!----<pre id="raw-response" style="background:#111; color:#0f0; padding:1rem; margin-bottom:1rem; max-height:200px; overflow:auto;"></pre>
+    --->
+    
+    <ul id="recommend-list"></ul>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            const res = await fetch('/api/recommend');
+            const data = await res.json();
+            const list = document.getElementById('recommend-list');
+            if (data.error || !Array.isArray(data) && !data.movies) {
+                list.innerHTML = '<li>No recommendations found</li>';
+                return;
+            }
+            const movies = data.movies || data;
+            if (!movies.length) {
+                list.innerHTML = '<li>No recommendations found</li>';
+                return;
+            }
+            movies.forEach(movie => {
+                const imgSrc = movie.large_thumbnail || '/static/img/samplemovieposter.jpg';
+                const genres = (movie.genre || '').split(',').map(g => g.trim());
+                const simple = (movie.simple_genres || '').replace(/^\[|\]$/g, '').split(',').map(s => s.replace(/['"]/g, '').trim());
+                const tags = [...new Set([...genres, ...simple])];
+                const li = document.createElement('li');
+                li.innerHTML = `
+                  <a href="${movie.link}" target="_blank">
+                    <figure>
+                      <img src="${imgSrc}" alt="${movie.name}">
+                      <figcaption>
+                        <div class="caption-title">${movie.name}</div>
+                        <div class="caption-tagline">${movie.tagline || ''}</div>
+<div class="caption-description">${movie.description}</div>
+                        <div class="tags">
+                          ${tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                        <div class="meta" style="margin-top:0.5rem; font-size:0.8rem; opacity:0.8;">
+                          Year: ${movie.date || ''} | Rating: ${movie.rating || ''} | Duration: ${movie.minute || ''} min
+                        </div>
+                      </figcaption>
+                    </figure>
+                  </a>`;
+                list.appendChild(li);
+            });
+        } catch (err) {
+            console.error(err);
+            document.getElementById('recommend-list').innerHTML = '<li>No recommendations found</li>';
+        }
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+{% extends 'layout.html' %}
+{% block title %}Pickie - Edit Features{% endblock %}
+{% block content %}
+<style>
+html, body { margin: 0; padding: 0; height: 100%; }
+  .visualization-container {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    background-color: #2d2542;
+    padding: 2.5rem;
+    color: #fff;
+    font-family: 'Quicksand', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .page-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #e0c3fc;
+  }
+  .features-panel {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .feature-card {
+    background-color: #3a3155;
+    padding: 1.2rem;
+    border-radius: 8px;
+  }
+  .feature-card h4 {
+    margin: 0 0 0.8rem 0;
+    color: #e0c3fc;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  .feature-select {
+    width: 100%;
+    padding: 10px 12px;
+    background-color: #4a3a69;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    appearance: none;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+  }
+  .confirm-button {
+    background-color: #8e44ad;
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+  }
+  .confirm-button:hover {
+    background-color: #9b59b6;
+    transform: translateY(-2px);
+  }
+</style>
+
+<div class="visualization-container">
+  <h2 class="page-title">Edit Basic Movie Features</h2>
+  <h3 class="section-title">If you'd like to!</h3>
+  <br>
+  <div class="features-panel">
+    <div class="feature-card">
+      <h4>Sentiment</h4>
+      <select id="sentiment" class="feature-select">
+        {% for option in ['positive','neutral','negative'] %}
+          <option value="{{ option }}" {% if features.sentiment == option %}selected{% endif %}>{{ option.capitalize() }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="feature-card">
+      <h4>Genre</h4>
+      <input id="genre" class="feature-select" type="text" value="{{ features.genre }}">
+    </div>
+    <div class="feature-card">
+      <h4>Mood</h4>
+      <input id="mood" class="feature-select" type="text" value="{{ features.mood }}">
+    </div>
+    <div class="feature-card">
+      <h4>Length</h4>
+      <select id="length" class="feature-select">
+        {% for option in ['short','medium','long'] %}
+          <option value="{{ option }}" {% if features.length == option %}selected{% endif %}>{{ option.capitalize() }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <button id="confirm-button" class="confirm-button">Confirm</button>
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+document.getElementById('confirm-button').addEventListener('click', async () => {
+  const features = {
+    sentiment: document.getElementById('sentiment').value,
+    genre: document.getElementById('genre').value,
+    mood: document.getElementById('mood').value,
+    length: document.getElementById('length').value
+  };
+  await fetch('/api/confirm', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({features})
+  });
+  window.location.href = '/results';
+});
+</script>
+{% endblock %}

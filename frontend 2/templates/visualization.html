@@ -1,0 +1,199 @@
+{% extends 'layout.html' %}
+{% block title %}Pickie - Extracted Features{% endblock %}
+
+{% block head %}
+<!-- Google Fonts - Quicksand -->
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="visualization-container">
+  
+  <div class="raw-query-container">
+
+    <h2 class="page-title">Your Movie Description</h2>
+    <div class="raw-query">{{ raw }}</div>
+  </div>
+  
+  <h2 class="page-title">Extracted Basic Features</h2>
+  <h3>Think of these as basic filters before the magic happens!</h3>
+  <br>
+  <div class="features-panel">
+    <div class="feature-card">
+      <h4 class="feature-title">Sentiment</h4>
+      <p class="feature-value">{{ features.sentiment }}</p>
+    </div>
+    
+    <div class="feature-card">
+      <h4 class="feature-title">Genre</h4>
+      <p class="feature-value">{{ features.genre }}</p>
+    </div>
+    
+    <div class="feature-card">
+      <h4 class="feature-title">Mood</h4>
+      <p class="feature-value">{{ features.mood }}</p>
+    </div>
+    
+    <div class="feature-card">
+      <h4 class="feature-title">Length</h4>
+      <p class="feature-value">{{ features.length }}</p>
+    </div>
+  </div>
+  
+  <button class="confirm-button" onclick="window.location.href='/review'">
+    Next <span class="arrow">→</span>
+  </button>
+</div>
+
+<style>
+  /* Base styles */
+  :root {
+    --primary-bg: #2d2542;
+    --card-bg: #3a3155;
+    --text-color: #fff;
+    --accent-color: #e0c3fc;
+    --button-color: #8e44ad;
+    --button-hover: #9b59b6;
+    --border-radius: 10px;
+    --card-radius: 8px;
+    --shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  body {
+    background-color: #201934;
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    color: var(--text-color);
+  }
+  
+  /* Container styles */
+  .visualization-container {
+    max-width: 800px;
+    margin: 40px auto;
+    background-color: var(--primary-bg);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+  }
+  
+  /* Heading styles */
+  .page-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+  }
+  
+  /* Query container */
+  .raw-query-container {
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+  
+  .raw-query {
+    background-color: var(--card-bg);
+    color: var(--accent-color);
+    padding: 1.2rem;
+    border-radius: var(--card-radius);
+    white-space: pre-wrap;
+    overflow-x: auto;
+    line-height: 1.5;
+    font-size: 1.1rem;
+  }
+  
+  /* Features panel */
+  .features-panel {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  
+  /* Feature cards */
+  .feature-card {
+    background-color: var(--card-bg);
+    padding: 1.2rem;
+    border-radius: var(--card-radius);
+    text-align: left;
+    transition: transform 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-3px);
+  }
+  
+  .feature-title {
+    margin: 0 0 0.8rem 0;
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  
+  .feature-value {
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.4;
+  }
+  
+  /* Button styles */
+  .confirm-button {
+    background-color: var(--button-color);
+    color: var(--text-color);
+    border: none;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Quicksand', sans-serif;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(142, 68, 173, 0.3);
+  }
+  
+  .confirm-button:hover {
+    background-color: var(--button-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(142, 68, 173, 0.4);
+  }
+  
+  .confirm-button:active {
+    transform: translateY(0);
+  }
+  
+  .arrow {
+    margin-left: 8px;
+    font-size: 1.2rem;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .visualization-container {
+      padding: 1.5rem;
+      margin: 20px auto;
+    }
+    
+    .features-panel {
+      grid-template-columns: 1fr;
+    }
+    
+    .page-title {
+      font-size: 1.8rem;
+    }
+  }
+</style>
+{% endblock %}

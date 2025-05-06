@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Lato, sans-serif;
+            margin: 0;
+            padding: 1rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(20, 20, 20, 1);
+            color: white;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            margin: 2rem 0;
+            text-align: center;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        
+        img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            transition: transform 1000ms;
+        }
+        
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 0.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+            max-width: 100%;
+            width: 70rem;
+        }
+        
+        figure {
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        figure::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(0, 0, 0, 0.5);
+            transform-origin: center;
+            opacity: 0;
+            transform: scale(2);
+            transition: opacity 300ms;
+        }
+        
+        figcaption {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+            color: white;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 600ms, transform 600ms;
+        }
+        
+        .caption-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .caption-description {
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+        
+        .tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.2rem 0.6rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+        }
+        
+        a:is(:hover, :focus) figure::after {
+            opacity: 1;
+        }
+        
+        a:is(:hover, :focus) figcaption {
+            opacity: 1;
+            transition: opacity 600ms;
+        }
+        
+        @media (prefers-reduced-motion: no-preference) {
+            figcaption {
+                transform: translate3d(0, 2rem, 0);
+            }
+            
+            figure::after {
+                border-radius: 50%;
+                opacity: 1;
+                transform: scale(0);
+                transition: transform 900ms;
+            }
+            
+            a:is(:hover, :focus) figure::after {
+                transform: scale(2.5);
+            }
+            
+            a:is(:hover, :focus) figcaption {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+                transition: opacity 600ms 400ms, transform 600ms 400ms;
+            }
+            
+            a:is(:hover, :focus) img {
+                transform: scale(1.2);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="page-title">Recommendations</h1>
+    
+    <ul>
+        <li>
+            <a href="#">
+                <figure>
+                    <img src='https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYzNDA0OTI3Nw&ixlib=rb-1.2.1&q=80&w=400' alt='Volcano and lava field against a stormy sky'>
+                    <figcaption>
+                        <div class="caption-title">Fire of the Gods</div>
+                        <div class="caption-description">A thrilling documentary about volcanic activity and its impact on surrounding landscapes.</div>
+                        <div class="tags">
+                            <span class="tag">Documentary</span>
+                            <span class="tag">Nature</span>
+                            <span class="tag">Science</span>
+                        </div>
+                    </figcaption>
+                </figure>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <figure>
+                    <img src='https://images.unsplash.com/photo-1633621533308-8760aefb5521?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYzNDA1MjAyMQ&ixlib=rb-1.2.1&q=80&w=400' alt='Guy on a bike ok a wooden bridge with a forest backdrop'>
+                    <figcaption>
+                        <div class="caption-title">The Woods Rider</div>
+                        <div class="caption-description">An inspiring journey of a mountain biker exploring remote trails across five continents.</div>
+                        <div class="tags">
+                            <span class="tag">Adventure</span>
+                            <span class="tag">Sports</span>
+                            <span class="tag">Travel</span>
+                        </div>
+                    </figcaption>
+                </figure>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <figure>
+                    <img src='https://images.unsplash.com/photo-1633635146842-12d386e64058?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYzNDA1MjA5OA&ixlib=rb-1.2.1&q=80&w=400' alt='Person standing alone in a misty forest'>
+                    <figcaption>
+                        <div class="caption-title">Into the Mist</div>
+                        <div class="caption-description">A haunting psychological thriller about a writer who retreats to a remote cabin, only to discover he's not alone.</div>
+                        <div class="tags">
+                            <span class="tag">Thriller</span>
+                            <span class="tag">Mystery</span>
+                            <span class="tag">Horror</span>
+                        </div>
+                    </figcaption>
+                </figure>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <figure>
+                    <img src='https://images.unsplash.com/photo-1568444438385-ece31a33ce78?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYzNDA1MjA5OA&ixlib=rb-1.2.1&q=80&w=400' alt='Person hiking on a trail through mountains while taking a photo with phone'>
+                    <figcaption>
+                        <div class="caption-title">Summit Stories</div>
+                        <div class="caption-description">Four friends embark on a life-changing hike through the wilderness, testing their bonds and resolve.</div>
+                        <div class="tags">
+                            <span class="tag">Drama</span>
+                            <span class="tag">Adventure</span>
+                            <span class="tag">Friendship</span>
+                        </div>
+                    </figcaption>
+                </figure>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <figure>
+                    <img src='https://images.unsplash.com/photo-1633515257379-5fda985bd57a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYzNDA1MjA5OA&ixlib=rb-1.2.1&q=80&w=400' alt='Street scene with person walking and others on motorbikes, all wearing masks'>
+                    <figcaption>
+                        <div class="caption-title">Urban Pulse</div>
+                        <div class="caption-description">An intimate look at daily life in six major Asian cities, exploring culture, tradition, and modernity.</div>
+                        <div class="tags">
+                            <span class="tag">Documentary</span>
+                            <span class="tag">Cultural</span>
+                            <span class="tag">Urban</span>
+                        </div>
+                    </figcaption>
+                </figure>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <figure>
+                    <img src='https://images.unsplash.com/photo-1633209931146-260ce0d16e22?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYzNDA1MjA5OA&ixlib=rb-1.2.1&q=80&w=400' alt='Fashionable-looking girl with blond hair and pink sunglasses'>
+                    <figcaption>
+                        <div class="caption-title">Style Chronicles</div>
+                        <div class="caption-description">Follow rising fashion icon Emma Blake as she navigates the cutthroat world of high fashion and social media.</div>
+                        <div class="tags">
+                            <span class="tag">Fashion</span>
+                            <span class="tag">Drama</span>
+                            <span class="tag">Biography</span>
+                        </div>
+                    </figcaption>
+                </figure>
+            </a>
+        </li>
+    </ul>
+</body>
+</html>

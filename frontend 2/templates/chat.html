@@ -1,0 +1,107 @@
+{% extends 'layout.html' %}
+{% block title %}Pickie - Chat{% endblock %}
+{% block content %}
+<div class="chat-wrapper">
+  <div class="chat-container">
+    <h1>Pickie</h1>
+    <p class="subtitle">Outline your movie description with text or speech.</p>
+    
+    <div class="input-container">
+      <textarea id="text-input" placeholder="Type your movie description here..." rows="10"></textarea>
+      
+      <div class="button-container">
+        <button id="send-text" class="submit-btn">Submit</button>
+        <button id="mic-toggle" class="mic-btn">
+          <i class="fa-solid fa-microphone"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Dark purple theme */
+  .chat-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #1f1b2e;
+    font-family: 'Quicksand', sans-serif;
+  }
+  .chat-container {
+    width: 90%;
+    max-width: 800px;
+    background-color: #2d2542;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  }
+  h1 {
+    font-family: 'Tangerine', cursive;
+    font-size: 3rem;
+    text-align: center;
+    color: white;
+    margin-bottom: 10px;
+  }
+  .subtitle {
+    font-family: 'Quicksand', sans-serif;
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
+    font-size: 1.2rem;
+  }
+  .input-container {
+    background-color: #3a3155;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  #text-input {
+    width: 100%;
+    padding: 20px;
+    border: none;
+    resize: none;
+    font-size: 1rem;
+    outline: none;
+    background-color: #4b406d;
+    color: #f0ecff;
+    font-family: 'Quicksand', sans-serif;
+    min-height: 200px;
+  }
+  .button-container {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    background-color: #3a3155;
+    border-top: 1px solid #4b406d;
+  }
+  .submit-btn {
+    background-color: #8e44ad;
+    color: #fff;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 50px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+    transition: background-color 0.3s;
+  }
+  .submit-btn:hover {
+    background-color: #9b59b6;
+  }
+  .mic-btn {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    margin-left: 15px;
+    color: #fff;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+  }
+</style>
+{% endblock %}
