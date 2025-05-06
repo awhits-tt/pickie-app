@@ -1,5 +1,5 @@
 # NLP-Movies-Recommender
-![screenshot](screen-image.png)
+![screenshot](pickie-landing-page.png)
 
 Goal:
 We’ll be trying to use sentiment analysis to extract a ranked order for sentiments present in the movies dataset
@@ -12,6 +12,7 @@ attempt to match the best fitted movies from our dataset and output them as reco
 - **Vector Store**: ChromaDB for fast semantic search over movie data
 - **Backend**: Flask (Python) for serving the API endpoints and integrating with the movie dataset
 - **Frontend**: React JS with Framer Motion for building an interactive and dynamic user interface
+- **Initial Prototype of Frontend** Created using Gradio
 
 
 ## Data Sources:
