@@ -39,10 +39,8 @@ python embedding.py
 python api.py
 
 ### 6. In another terminal, run and start the frontend of the application
-cd frontend
-npm install
-npm install motion
-npm start
+cd frontend 2
+python app.py
 
 ### 7. Access the App
-Visit http://localhost:3000 in your browser.
+Visit http://127.0.0.1:5000/recommend in your browser.
