@@ -35,12 +35,13 @@ pip install -r requirements.txt
 ### 4. Run the vector embedding processing file of the dataset
 python embedding.py
 
-### 5. Run the Flask API file
+### 5. Run the Flask API file on one terminal
 python api.py
 
-### 6. Run and start the frontend of the application
+### 6. In another terminal, run and start the frontend of the application
 cd frontend
 npm install
+npm install motion
 npm start
 
 ### 7. Access the App
