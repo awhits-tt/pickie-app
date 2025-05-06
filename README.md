@@ -8,9 +8,11 @@ attempt to match the best fitted movies from our dataset and output them as reco
 
 ## Tools
 - **Dataset**: A CSV of movies annotated with genre, emotion scores, and descriptions
-- **Embeddings**: SentenceTransformers (`all-MiniLM-L6-v2`)
-- **Vector Store**: ChromaDB for fast semantic search
-- **Frontend**: Gradio
+- **Embeddings**: SentenceTransformers (`all-MiniLM-L6-v2`) for semantic embeddings of movie descriptions
+- **Vector Store**: ChromaDB for fast semantic search over movie data
+- **Backend**: Flask (Python) for serving the API endpoints and integrating with the movie dataset
+- **Frontend**: React JS with Framer Motion for building an interactive and dynamic user interface
+
 
 ## Data Sources:
 - Letterboxd (Movies Dataset) via Kaggle:
@@ -18,8 +20,6 @@ https://www.kaggle.com/datasets/gsimonx37/letterboxd?select=genres.csv
 
 # How to run dashboard locally:
 ### 1. Clone the repo
-git clone https://github.com/yourusername/your-repo-name.git
-cd your-repo-name
 
 ### 2. (Optional but recommended) Create and activate a virtual environment
 python -m venv .venv
@@ -31,5 +31,16 @@ source .venv/bin/activate
 ### 3. Install dependencies
 pip install -r requirements.txt
 
-### 4. Run the dashboard
-python gradio-dashboard.py
+### 4. Run the vector embedding processing file of the dataset
+python embedding.py
+
+### 5. Run the Flask API file
+python api.py
+
+### 6. Run and start the frontend of the application
+cd frontend
+npm install
+npm start
+
+### 7. Access the App
+Visit http://localhost:3000 in your browser.

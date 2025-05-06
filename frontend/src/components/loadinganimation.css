@@ -1,0 +1,36 @@
+.loading-animation-wrapper {
+    width: 100%;
+    position: relative;
+  }
+  
+  .progress-bar-wrapper {
+    width: 80%; 
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff007f, #ff6600, #ff9900);
+    background-size: 200% 200%;
+    border-radius: 5px;
+    transition: width 0.5s ease-in-out; 
+    width: 0%; 
+  }
+  
+  /* animation for progress bar */
+  @keyframes progressBarAnimation {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+  

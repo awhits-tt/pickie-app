@@ -17,9 +17,9 @@ function RecommendationResults({ recommendations, onBack }) {
             animate={{ opacity: 1, x: 0 }}     // Slide to its original position
             transition={{ delay: index * 0.1, type: "spring", stiffness: 100 }}  // Delay each animation slightly
           >
-            <img 
-              src={movie.large_thumbnail} 
-              alt={movie.title} 
+            <img
+              src={movie.large_thumbnail}
+              alt={movie.title}
               className="recommendation-image"
             />
             <div className="recommendation-info">
@@ -31,7 +31,10 @@ function RecommendationResults({ recommendations, onBack }) {
         ))}
       </ul>
 
-      <button className="back-button" onClick={onBack}>Back</button>
+      <button className="back-button" onClick={onBack}>
+        Want to input again?
+      </button>
+
     </div>
   );
 }

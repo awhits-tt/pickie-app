@@ -1,53 +1,50 @@
 import React, { useState } from 'react';
 import LandingPage from './pages/landingpage';
 import RecommendationForm from './pages/RecommendationForm';
+import RecommendationProcessing from './pages/RecommendationProcessing';
 import RecommendationResults from './pages/RecommendationResults';
 
 function App() {
-  const [step, setStep] = useState(0);           // 0 = landing, 1 = form, 2 = results
+  const [step, setStep] = useState(0);  // 0 = landing, 1 = form, 2 = processing, 3 = results
+  const [formData, setFormData] = useState(null);
   const [recommendations, setRecommendations] = useState([]);
-
 
   const handleBegin = () => setStep(1);
 
-  const handleRecommend = async (userInput) => {
-    // Ensure userInput is structured as an object with the correct fields
+  const handleRecommend = (userInput) => {
     const formattedInput = {
-      query: userInput.query || "",    // default empty string
-      category: userInput.category || "All",  // set to "All" if not provided
-      tone: userInput.tone || "All",    // set to "All" if not provided
+      query: userInput.query || "",
+      category: userInput.category || "All",
+      tone: userInput.tone || "All",
     };
 
+    setFormData(formattedInput);
+    setStep(2); // Go to processing page
+  };
+
+  // ✅ This is the real fetch logic
+  const fetchRecommendations = async (input) => {
     try {
-      console.log("Sending request with input:", formattedInput); // debug
       const response = await fetch("http://127.0.0.1:5000/recommend", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formattedInput),  // use the formattedInput structure for any responses on frontend
+        body: JSON.stringify(input),
       });
-
-      console.log("Response Status:", response.status); // debug
 
       if (!response.ok) {
         throw new Error("Failed to fetch recommendations");
       }
 
       const data = await response.json();
-      console.log("Recommendations:", data);  // debug
-
-      // store the recommendations in state
-      setRecommendations(data);
-
-      // move to the results page after receiving recommendations
-      setStep(2);
+      return data;
     } catch (error) {
-      console.error("Error:", error);  
+      console.error("Error fetching recommendations:", error);
+      return []; // fallback to empty array
     }
   };
 
-  // start with landing page, then form, then results
   return (
     <>
       {step === 0 && <LandingPage onBegin={handleBegin} />}
@@ -57,8 +54,22 @@ function App() {
       )}
 
       {step === 2 && (
-        <RecommendationResults recommendations={recommendations} />
+        <RecommendationProcessing
+          formData={formData}
+          getRecommendations={fetchRecommendations} // ✅ Correct function now
+          onComplete={(data) => {
+            setRecommendations(data);
+            setStep(3);
+          }}
+        />
       )}
+
+{step === 3 && (
+  <RecommendationResults 
+    recommendations={recommendations}
+    onBack={() => setStep(1)} // 👈 this sends user back to the form
+  />
+)}
     </>
   );
 }

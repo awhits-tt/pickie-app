@@ -38,11 +38,12 @@
   .recommendation-item {
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
-    overflow: hidden;
+    overflow: hidden; /* You can keep this if needed for rounded corners */
     width: 250px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     transition: transform 0.2s ease;
-    height: 450px;
+    display: flex;
+    flex-direction: column;
   }
   
   .recommendation-item:hover {
@@ -57,6 +58,7 @@
   }
   
   .recommendation-info {
+    min-height: 120px; /* or whatever base size you like */
     padding: 1rem;
     color: white;
   }

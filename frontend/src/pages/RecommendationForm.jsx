@@ -17,7 +17,7 @@ function RecommendationForm({ onSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(userInput);  // pass the user input to the parent component
+    onSubmit(userInput);
   };
 
   return (
@@ -44,12 +44,19 @@ function RecommendationForm({ onSubmit }) {
           >
             <option value="All">All Categories</option>
             <option value="Action">Action</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Animation">Animation</option>
             <option value="Comedy">Comedy</option>
+            <option value="Crime">Crime</option>
             <option value="Drama">Drama</option>
-            <option value="Horror">Action</option>
-            <option value="Comedy">Comedy</option>
-            <option value="Drama">Drama</option>
-            {/* ADD MORE ACCURATE CATEGORIES */}
+            <option value="Fantasy">Fantasy</option>
+            <option value="Horror">Horror</option>
+            <option value="Mystery">Mystery</option>
+            <option value="Romance">Romance</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+            <option value="Thriller">Thriller</option>
+            <option value="Western">Western</option>
+            <option value="Documentary">Documentary</option>
           </select>
 
           <select
@@ -61,8 +68,14 @@ function RecommendationForm({ onSubmit }) {
             <option value="All">All Tones</option>
             <option value="Happy">Happy</option>
             <option value="Sad">Sad</option>
-            <option value="Angry">Angry</option>
-            {/* ADD MORE ACCURATE TONES */}
+            <option value="Suspenseful">Suspenseful</option>
+            <option value="Heartwarming">Heartwarming</option>
+            <option value="Inspiring">Inspiring</option>
+            <option value="Dark">Dark</option>
+            <option value="Feel-good">Feel-good</option>
+            <option value="Romantic">Romantic</option>
+            <option value="Chilling">Chilling</option>
+            <option value="Funny">Funny</option>
           </select>
 
           <button type="submit" className="submit-button">Get Recommendations</button>
