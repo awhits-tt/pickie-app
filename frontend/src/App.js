@@ -19,10 +19,10 @@ function App() {
     };
 
     setFormData(formattedInput);
-    setStep(2); // Go to processing page
+    setStep(2); // go to processing page
   };
 
-  // ✅ This is the real fetch logic
+  
   const fetchRecommendations = async (input) => {
     try {
       const response = await fetch("http://127.0.0.1:5000/recommend", {
@@ -41,7 +41,7 @@ function App() {
       return data;
     } catch (error) {
       console.error("Error fetching recommendations:", error);
-      return []; // fallback to empty array
+      return []; 
     }
   };
 
@@ -56,7 +56,7 @@ function App() {
       {step === 2 && (
         <RecommendationProcessing
           formData={formData}
-          getRecommendations={fetchRecommendations} // ✅ Correct function now
+          getRecommendations={fetchRecommendations} 
           onComplete={(data) => {
             setRecommendations(data);
             setStep(3);
@@ -67,7 +67,7 @@ function App() {
 {step === 3 && (
   <RecommendationResults 
     recommendations={recommendations}
-    onBack={() => setStep(1)} // 👈 this sends user back to the form
+    onBack={() => setStep(1)} 
   />
 )}
     </>
