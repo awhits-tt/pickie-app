@@ -30,7 +30,7 @@ function RecommendationForm({ onSubmit }) {
           <input
             type="text"
             name="query"
-            placeholder="Enter a keyword"
+            placeholder="Enter what you're looking for!"
             value={userInput.query}
             onChange={handleChange}
             className="input-field"
