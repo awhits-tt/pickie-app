@@ -11,8 +11,10 @@ attempt to match the best fitted movies from our dataset and output them as reco
 - **Embeddings**: SentenceTransformers (`all-MiniLM-L6-v2`) for semantic embeddings of movie descriptions
 - **Vector Store**: ChromaDB for fast semantic search over movie data
 - **Backend**: Flask (Python) for serving the API endpoints and integrating with the movie dataset
-- **Frontend**: React JS with Framer Motion for building an interactive and dynamic user interface
-- **Initial Prototype of Frontend** Created using Gradio
+- **Frontend**: Flask with HTML, CSS, JS
+- **Initial Prototype of Frontend**: Created using Gradio
+- **Second prototype of frontend**: React JS with Framer Motion
+
 
 ## Video Link
 https://youtu.be/Pmd8TmFKkAg
